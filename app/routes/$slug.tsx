@@ -8,6 +8,7 @@ import {
 } from "../../src/services/content/getHeadProps";
 import { Layout } from "../../src/layouts/Layout";
 import type { ILayout, MetaProps } from "../../src/types";
+import { Toast } from "../../src/components/Toast";
 
 export const meta = (props: MetaProps): ReturnType<MetaFunction> => {
   return props?.data?.page?.Page
@@ -19,7 +20,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   let slug = params.slug;
 
   if (slug === "home") {
-    return redirect("/");
+    return redirect("/", 301);
   }
 
   if (!slug) slug = "home";
@@ -30,7 +31,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   }
 
   return json(
-    { page, publicURL: getPublicUrl() },
+    {
+      page,
+      publicURL: getPublicUrl(),
+      isDevelopment: !(
+        process.env.REMIX_PUBLIC_SITE_URL || process.env.VERCEL_URL
+      ),
+    },
     {
       headers: {
         "Cache-Control": "s-maxage=1, stale-while-revalidate",
@@ -40,6 +47,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export default function SlugPage() {
-  const { page } = useLoaderData<typeof loader>();
-  return <Layout {...(page as ILayout)} />;
+  const { page, isDevelopment } = useLoaderData<typeof loader>();
+  return (
+    <>
+      {/* remove this line if you want to remove the toast */}
+      {isDevelopment && <Toast />}
+      <Layout {...(page as ILayout)} />
+    </>
+  );
 }

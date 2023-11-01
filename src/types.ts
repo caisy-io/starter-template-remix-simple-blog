@@ -18,5 +18,6 @@ export interface MetaProps {
   data: {
     page: ILayout;
     publicURL?: string;
+    isDevelopment?: boolean;
   };
 }

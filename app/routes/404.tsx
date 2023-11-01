@@ -21,6 +21,7 @@ export const loader = async () => {
   return json(
     { page, publicURL: getPublicUrl() },
     {
+      status: 404,
       headers: {
         "Cache-Control": "s-maxage=1, stale-while-revalidate",
       },

@@ -27,7 +27,7 @@ export function ErrorBoundary() {
   );
 }
 
-export default function App(props) {
+export default function App() {
   return (
     <html lang="en">
       <head>
@@ -41,7 +41,6 @@ export default function App(props) {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <ErrorBoundary />
       </body>
     </html>
   );
