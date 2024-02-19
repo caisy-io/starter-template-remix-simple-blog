@@ -413,6 +413,13 @@ export type IGenCaisy_Field_Document_NotFound = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type IGenCaisy_Field_Tag = {
+  __typename?: 'Caisy_Field_Tag';
+  color?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
 export type IGenCategory = {
   __typename?: 'Category';
   _meta?: Maybe<IGenCaisyDocument_Meta>;
@@ -944,6 +951,7 @@ export type IGenQuery = {
   NewsletterSignup?: Maybe<IGenNewsletterSignup>;
   Page?: Maybe<IGenPage>;
   SeoInformation?: Maybe<IGenSeoInformation>;
+  Tag?: Maybe<IGenCaisy_Field_Tag>;
   allAsset?: Maybe<IGenAsset_Connection>;
   allAuthor?: Maybe<IGenAuthor_Connection>;
   allBlogArticle?: Maybe<IGenBlogArticle_Connection>;
@@ -957,6 +965,7 @@ export type IGenQuery = {
   allNewsletterSignup?: Maybe<IGenNewsletterSignup_Connection>;
   allPage?: Maybe<IGenPage_Connection>;
   allSeoInformation?: Maybe<IGenSeoInformation_Connection>;
+  allTags?: Maybe<IGenTag_Connection>;
 };
 
 
@@ -1045,6 +1054,11 @@ export type IGenQueryPageArgs = {
 export type IGenQuerySeoInformationArgs = {
   id: Scalars['ID'];
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type IGenQueryTagArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1190,6 +1204,14 @@ export type IGenQueryAllSeoInformationArgs = {
   where?: InputMaybe<Array<InputMaybe<IGenSeoInformation_Where>>>;
 };
 
+
+export type IGenQueryAllTagsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
 export type IGenSeoInformation = {
   __typename?: 'SeoInformation';
   _meta?: Maybe<IGenCaisyDocument_Meta>;
@@ -1258,6 +1280,19 @@ export type IGenSeoInformation_Where = {
   ogImage?: InputMaybe<IGenSeoInformation_OgImage_Where>;
   title?: InputMaybe<IGenCaisyField_String_Where>;
   titleInternal?: InputMaybe<IGenCaisyField_String_Where>;
+};
+
+export type IGenTag_Connection = {
+  __typename?: 'Tag_Connection';
+  edges?: Maybe<Array<Maybe<IGenTag_ConnectionEdge>>>;
+  pageInfo?: Maybe<IGenPageInfo>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type IGenTag_ConnectionEdge = {
+  __typename?: 'Tag_ConnectionEdge';
+  cursor?: Maybe<Scalars['String']>;
+  node?: Maybe<IGenCaisy_Field_Tag>;
 };
 
 export type IGenAssetFragment = { __typename?: 'Asset', title?: string | null, src?: string | null, originType?: string | null, keywords?: string | null, id?: string | null, dominantColor?: string | null, description?: string | null, copyright?: string | null, author?: string | null };
