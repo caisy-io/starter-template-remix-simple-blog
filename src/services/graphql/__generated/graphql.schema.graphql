@@ -796,6 +796,18 @@ type Caisy_Field_Document_NotFound {
 }
 
 """"""
+type Caisy_Field_Tag {
+  """"""
+  color: String
+
+  """"""
+  id: String
+
+  """"""
+  name: String
+}
+
+""""""
 type Category {
   """"""
   _meta: CaisyDocument_Meta
@@ -1808,6 +1820,9 @@ type Query {
   SeoInformation(id: ID!, locale: String): SeoInformation
 
   """"""
+  Tag(id: ID!): Caisy_Field_Tag
+
+  """"""
   allAsset(after: String, before: String, first: Int, last: Int, locale: String, sort: [Asset_Sort], where: [Asset_Where]): Asset_Connection
 
   """"""
@@ -1845,6 +1860,9 @@ type Query {
 
   """"""
   allSeoInformation(after: String, before: String, first: Int, last: Int, locale: String, sort: [SeoInformation_Sort], where: [SeoInformation_Where]): SeoInformation_Connection
+
+  """"""
+  allTags(after: String, before: String, first: Int, last: Int): Tag_Connection
 }
 
 """"""
@@ -1988,4 +2006,25 @@ input SeoInformation_Where {
 
   """"""
   titleInternal: CaisyField_String_Where
+}
+
+""""""
+type Tag_Connection {
+  """"""
+  edges: [Tag_ConnectionEdge]
+
+  """"""
+  pageInfo: PageInfo
+
+  """"""
+  totalCount: Int
+}
+
+""""""
+type Tag_ConnectionEdge {
+  """"""
+  cursor: String
+
+  """"""
+  node: Caisy_Field_Tag
 }
